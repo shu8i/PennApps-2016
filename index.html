@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Transactions</title>
+	<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="js/handlebars.js"></script>
+</head>
+<body>
+	<div class="greetings-container-placeholder"></div>
+	<div class="accounts-container-placeholder"></div>
+	<input type="text" id="transaction_amount">
+	<a href="#0" id="buy">BUY</a>
+	<script src="js/scripts.js"></script>
+
+	<!-- Handlebar Templates -->
+	<script id="greetings-template" type="text/x-handlebars-template">
+		<div class="greetings-container">
+			<h4>Good {{timeofday}}, {{firstname}}</h4>
+		</div>
+	</script>
+	<script id="accounts-template" type="text/x-handlebars-template">
+		<div class="accounts-container dropdown">
+			<div class="title">Accounts</div>
+			<ul class="accounts">
+				{{#each this}}
+					<li>
+						<div class="account-info-container">
+							<div class="account-header">
+								<div class="nickname">{{nickname}}</div>
+								<div class="balance">{{balance}}</div>
+							</div>
+							<div class="account-number">{{account_number}}</div>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+	</script>
+</body>
+</html>
