@@ -3,7 +3,6 @@ account_id = "56a3986c957f400e00aa8ed2";
 
 $(document).ready(function() {
     $.when(get_account_info(), get_user_accounts()).done(function(user_info, account_info) {
-        console.log(account_info[0]);
         fill_template("#greetings-template", ".greetings-container-placeholder",
                         {timeofday: get_greeting_text(), firstname: user_info[0]["first_name"]});
         fill_template("#accounts-template", ".accounts-container-placeholder", account_info[0]);
