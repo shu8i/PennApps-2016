@@ -1,0 +1,22 @@
+ul
+{
+    list-style-type: none;
+}
+
+.nickname, .balance {
+	display: inline-block;
+}
+
+.account-number {
+	font-size: .7em;
+	color: #666;
+}
+
+.cologo {
+	width: 240px;
+	height: 84px;
+	position: absolute;
+	bottom: 30px;
+	left: 30px;
+	opacity: 0.5;
+}
