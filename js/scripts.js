@@ -39,6 +39,8 @@ $(document).ready(function() {
     $.when(get_account_info(), get_user_accounts()).done(function(user_info, account_info) {
         account_info[0][0].balance = round_it(account_info[0][0].balance);
         account_info[0][1].balance = round_it(account_info[0][1].balance);
+        // account_info[0][1].balance = round_it(localStorage.getItem("savings_balance"));
+        // localStorage.setItem("savings_balance", account_info[0][1].balance);
         fill_template("#greetings-template", ".greetings-container-placeholder",
                         {timeofday: get_greeting_text(), firstname: user_info[0]["first_name"]});
         fill_template("#accounts-template", ".accounts-container-placeholder", account_info[0]);
@@ -58,20 +60,33 @@ $(document).ready(function() {
 });
 
 function check_for_refresh() {
-    var balance = $(".balance").first().html().substring(1);
+    var balance_0 = $(".balance").first().html().substring(1);
+    var balance_1 = $(".balance").eq(1).html().substring(1);
     $.ajax({
         url: "http://api.reimaginebanking.com/customers/" + account_id + "/accounts?key=" + api_key,
         success: function(res) {
-            var new_balance = round_it(res[0].balance)+"";
-            if (new_balance != balance) {
-                var cents = round_it("0" + new_balance.substring(new_balance.indexOf(".")));
+            var new_balance_0 = round_it(res[0].balance)+"";
+            var new_balance_1 = round_it(res[1].balance)+"";
+            if (new_balance_0 != balance_0) {
+                var cents = round_it("0" + new_balance_0.substring(new_balance_0.indexOf(".")));
                 transfer_funds(cents);
                 $(".balance").first().fadeOut(function() {
                     $(this).html("$"+round_it(res[0].balance));
                     $(this).fadeIn();
                 });
             } else {
-                console.log("not lol");
+                console.log("not lol 0");
+            }
+
+            if (new_balance_1 != balance_1) {
+                var cents = round_it("0" + new_balance_1.substring(new_balance_1.indexOf(".")));
+                transfer_funds(cents);
+                $(".balance").eq(1).fadeOut(function() {
+                    $(this).html("$"+round_it(res[1].balance));
+                    $(this).fadeIn();
+                });
+            } else {
+                console.log("not lol 1");
             }
         }
     })
@@ -157,32 +172,62 @@ function get_account_info() {
 }
 
 function transfer_funds(cents) {
-    console.log('transfering...');
-    $.ajax({
-        url: "http://api.reimaginebanking.com/accounts/56a3a708957f400e00aa8ed3/transfers?key=963adb712062f1bd2057a6e4063a9c06",
-        type: "POST",
-        dataType: 'jsonp',
-        data: {
-          "medium": "balance",
-          "payee_id": "56a3a72a957f400e00aa8ed4",
-          "amount": 15,
-          "transaction_date":"2016-01-23",
-          "status": "completed",
-          "description": "string"
-        },
-        success: function(res) {
-            console.log(res);
-            var old_balance = round_it($(".balance:nth-child(1)").html().substring(1));
-            var new_balance = old_balance + cents;
-            $(".balance:nth-child(1)").fadeOut(function() {
-                $(this).html("$"+round_it(new_balance));
-                $(this).fadeIn();
-            });
-        },
-        error: function(res) {
-            console.log(res);
-        }
-    });
+//     console.log(localStorage.getItem("savings_balance"));
+//     var old_balance = localStorage.getItem("savings_balance");
+//     var new_balance = round_it(old_balance) + cents;
+//     console.log(new_balance);
+//     localStorage.setItem("savings_balance", new_balance);
+//     $(".balance").eq(1).fadeOut(function() {
+//         $(this).html("$"+round_it(localStorage.getItem("savings_balance")));
+//         $(this).fadeIn();
+//     });
+
+//     $.ajax({
+//         url: "http://api.reimaginebanking.com/accounts/56a3a708957f400e00aa8ed3/purchases?key=963adb712062f1bd2057a6e4063a9c06",
+//         type: "POST",
+//         data: 
+//          {
+//   "merchant_id": "56241a13de4bf40b17112338",
+//   "medium": "balance",
+//   "amount": 5.17,
+//   "status": "completed",
+//   "description": "desc"
+// }
+//         ,dataType : 'jsonp',
+//         success: function(result) {
+//             console.log("done"+result);
+//         },
+//         error: function(xhr, status, error) {
+//             console.log(status+"="+error);
+//             console.log(xhr.responseText);
+//         }
+//     });
+//     // console.log('transfering...');
+//     // $.ajax({
+//     //     url: "http://api.reimaginebanking.com/accounts/56a3a708957f400e00aa8ed3/transfers?key=963adb712062f1bd2057a6e4063a9c06",
+//     //     type: "POST",
+//     //     dataType: 'json',
+//     //     crossDomain: true,
+//         data: {
+//           "medium": "balance",
+//           "payee_id": "56a3a72a957f400e00aa8ed4",
+//           "amount": 15,
+//           "status": "completed",
+//           "description": "string"
+//         },
+//     //     success: function(res) {
+//     //         console.log(res);
+//     //         var old_balance = round_it($(".balance:nth-child(1)").html().substring(1));
+//     //         var new_balance = old_balance + cents;
+//     //         $(".balance:nth-child(1)").fadeOut(function() {
+//     //             $(this).html("$"+round_it(new_balance));
+//     //             $(this).fadeIn();
+//     //         });
+//     //     },
+//     //     error: function(res) {
+//     //         console.log(res);
+//     //     }
+//     // });
 }
 
 function get_user_accounts() {
