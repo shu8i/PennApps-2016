@@ -192,7 +192,7 @@ button.fs-continue,
 	border: 2px solid rgba(0,0,0,0.4);
 	color: rgba(0,0,0,0.4);
 	border-radius: 50%;
-	content: 'i';
+	/*content: 'i';*/
 	vertical-align: top;
 	text-align: center;
 	font-weight: 700;
@@ -206,14 +206,14 @@ button.fs-continue,
 
 .fs-form-full .fs-fields > li label[data-info]::before {
     position: absolute;
-    bottom: 100%;
+    bottom: 80%;
    	left: 0;
     padding: 0 0 10px;
     min-width: 200px;
 	content: attr(data-info);
 	font-size: 0.4em;
 	color: #6a7b7e;
-    opacity: 0;
+    opacity: 1;
     -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
     transition: opacity 0.3s, transform 0.3s;
     -webkit-transform: translate3d(0,-5px,0);
@@ -674,7 +674,7 @@ button.fs-continue:hover {
 /* Error message */
 .fs-message-error {
 	position: absolute;
-	bottom: 75%;
+	bottom: 70%;
 	left: 50%;
 	z-index: 800;
 	max-width: 960px;
@@ -882,4 +882,8 @@ input[type=text]::-ms-clear {
 		-webkit-transform: translate3d(0,0,0);
 		transform: translate3d(0,0,0);
 	}
+}
+
+.fs-field-label.fs-anim-upper {
+	width: 740px;
 }

@@ -1,7 +1,30 @@
 api_key = "963adb712062f1bd2057a6e4063a9c06";
 account_id = "56a3986c957f400e00aa8ed2";
+charity_list = [
+    "American Diabetes Association",
+    "Books for Africa",
+    "Direct Relief",
+    "Midwest Food Bank",
+    "Step Up For Students",
+    "MAP International",
+    "World Food Bank",
+    "Central Illinois Foodbank",
+    "Central Pennsylvenia Foodbank",
+    "Orphan Grain Train"
+];
 
 $(document).ready(function() {
+    fill_template("#charities-template", ".charities-container-placeholder", {charities: charity_list});
+    $(".fa-heart").click(function() {
+        $(".charities-container-placeholder").fadeIn();
+    });
+
+    $(".charities li").click(function() {
+        if ($(".charities-container-placeholder").is(":visible")) {
+            $(".charities-container-placeholder").fadeOut();
+        }
+    });
+
     $.when(get_account_info(), get_user_accounts()).done(function(user_info, account_info) {
         fill_template("#greetings-template", ".greetings-container-placeholder",
                         {timeofday: get_greeting_text(), firstname: user_info[0]["first_name"]});

@@ -9,6 +9,7 @@
 		<meta name="keywords" content="fullscreen form, css animations, distraction-free, web design" />
 		<meta name="author" content="Codrops" />
 		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
@@ -27,26 +28,32 @@
 				<div class="fs-title">
 					<div class="greetings-container-placeholder"></div>
 					<div class="accounts-container-placeholder"></div>
+					<div class="supporting-charity">
+						<span class="gray">Currently Supporting:</span>
+						American Diabetes Association
+					</div>
 				</div>
 				<form id="myform" class="fs-form fs-form-full" autocomplete="off">
 					<ol class="fs-fields">
 						<li>
-							<label class="fs-field-label fs-anim-upper" for="q5">Pay Terminal</label>
-							<input class="fs-mark fs-anim-lower" id="q5" name="q5" type="number" placeholder="1000" step="100" min="100"/>
+							<label class="fs-field-label fs-anim-upper" for="q1">Pay Terminal</label>
+							<input class="fs-mark fs-anim-upper" id="q1" name="q1" type="number" placeholder="1000" step="100" min="100" required/>
 						</li>
 						<li data-input-trigger>
-							<label class="fs-field-label fs-anim-upper" for="q3" data-info="This will help us know what kind of service you need">Wish List</label>
+							<label class="fs-field-label fs-anim-upper" for="q2" data-info="Upon reaching your target, Capital One will donate 3% of the item cost to your favorite charity: American Diabetes Association">Wish List</label>
 							<div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower">
-								<span><input id="q3b" name="q3" type="radio" value="conversion"/><label for="q3b" class="radio-conversion">Sell things</label></span>
-								<span><input id="q3c" name="q3" type="radio" value="social"/><label for="q3c" class="radio-social">Become famous</label></span>
-								<span><input id="q3a" name="q3" type="radio" value="mobile"/><label for="q3a" class="radio-mobile">Mobile market</label></span>
+								<span><input id="q2b" name="q2" type="radio" value="conversion"/><label for="q2b" class="radio-conversion">Sell things</label></span>
+								<span><input id="q2c" name="q2" type="radio" value="social"/><label for="q2c" class="radio-social">Become famous</label></span>
+								<span><input id="q2a" name="q2" type="radio" value="mobile"/><label for="q2a" class="radio-mobile">Mobile market</label></span>
 							</div>
 						</li>
 					</ol><!-- /fs-fields -->
-					<button class="fs-submit" type="submit">Send answers</button>
+					<button class="fs-submit" type="submit">Submit Payment</button>
 				</form><!-- /fs-form -->
 			</div><!-- /fs-form-wrap -->
 			<img src="https://s.graphiq.com/sites/default/files/765/media/images/Capital_One_827157.png" class="cologo" alt="">
+			<i class="fa fa-heart"></i>
+			<div class="charities-container-placeholder"></div>
 		</div><!-- /container -->
 		<script src="js/classie.js"></script>
 		<script src="js/selectFx.js"></script>
@@ -82,12 +89,19 @@
                     <li>
                         <div class="account-info-container">
                             <div class="account-header">
-                                <div class="nickname">{{type}} Balance: </div>
+                                <div class="nickname gray">{{type}} Balance: </div>
                                 <div class="balance">${{balance}}</div>
                             </div>
-                            <div class="account-number">Account #: {{account_number}}</div>
+                            <div class="account-number"><span class="gray">Account #:</span> {{account_number}}</div>
                         </div>
                     </li>
+                {{/each}}
+            </ul>
+    	</script>
+   		<script id="charities-template" type="text/x-handlebars-template">
+            <ul class="charities" role="menu" aria-labelledby="dLabel">
+                {{#each charities}}
+                    <li>{{this}}</li>
                 {{/each}}
             </ul>
     	</script>

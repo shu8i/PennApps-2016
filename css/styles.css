@@ -9,6 +9,14 @@ ul
 
 .account-number {
 	font-size: .7em;
+}
+
+.supporting-charity {
+	margin-left: 2.5em;
+	margin-top: -.5em;
+}
+
+.gray {
 	color: #666;
 }
 
@@ -19,4 +27,45 @@ ul
 	bottom: 30px;
 	left: 30px;
 	opacity: 0.5;
+}
+
+.fa-heart {
+	opacity: 0.5;
+	color: #AF1B3F;
+	position: absolute;
+	bottom: 40px;
+	left: 350px;
+	cursor: pointer;
+	font-size: 3em;
+	transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+.fa-heart:hover {
+	opacity: 1;
+}
+
+ul.charities {
+	-webkit-padding-end: 20px !important;
+}
+
+div.charities-container-placeholder {
+	position: absolute;
+	bottom: 90px;
+	left: 350px;
+	z-index: 999999;
+	background: #34393F;
+	border-radius: 1em;
+	border: solid 3px #232529;
+	display: none;
+}
+
+div.charities-container-placeholder li {
+	padding: .2em;
+	cursor: pointer;
+}
+
+div.charities-container-placeholder li:hover {
+	background: #473144;
 }
