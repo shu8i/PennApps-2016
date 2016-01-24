@@ -12,8 +12,7 @@ ul
 }
 
 .supporting-charity {
-	margin-left: 2.5em;
-	margin-top: -.5em;
+	float: right;
 }
 
 .gray {
@@ -68,4 +67,53 @@ div.charities-container-placeholder li {
 
 div.charities-container-placeholder li:hover {
 	background: #473144;
+}
+
+.wishlist-container-placeholder {
+	font-size: .5em;
+	float: right;
+	width: 55%;
+	background: #666;
+	padding: .5em;
+	border-radius: .5em;
+	margin-top: -50px;
+}
+
+th {
+	font-weight: normal;
+}
+
+th.img {
+	width: 10%;
+}
+
+th.name {
+	width: 30%;
+}
+
+th.policy {
+	width: 15%;
+}
+
+.wlicon {
+	width: 35px;
+	height: 35px;
+}
+
+.progress {
+	width: 100%;
+	height: 30px;
+}
+.progress-wrap {
+	background: #f80;
+	margin: 20px 0;
+	overflow: hidden;
+	position: relative;
+}
+.progress-bar {
+	background: #ddd;
+	left: 0;
+	position: absolute;
+	top: 0;
+	color: #f80;
 }

@@ -19,33 +19,26 @@
 		<script src="js/modernizr.custom.js"></script>
 		<script src="js/handlebars.js"></script>
 		<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+		<script src="js/Chart.min.js"></script>
 		<script src="js/scripts.js"></script>
 	</head>
 	<body>
 		<div class="container">
-
 			<div class="fs-form-wrap" id="fs-form-wrap">
 				<div class="fs-title">
-					<div class="greetings-container-placeholder"></div>
-					<div class="accounts-container-placeholder"></div>
 					<div class="supporting-charity">
 						<span class="gray">Currently Supporting:</span>
-						American Diabetes Association
+						<span class="charity">American Diabetes Association</span>
 					</div>
+					<div class="greetings-container-placeholder"></div>
+					<div class="accounts-container-placeholder"></div>
 				</div>
 				<form id="myform" class="fs-form fs-form-full" autocomplete="off">
 					<ol class="fs-fields">
-						<li>
-							<label class="fs-field-label fs-anim-upper" for="q1">Pay Terminal</label>
-							<input class="fs-mark fs-anim-upper" id="q1" name="q1" type="number" placeholder="1000" step="100" min="100" required/>
-						</li>
 						<li data-input-trigger>
-							<label class="fs-field-label fs-anim-upper" for="q2" data-info="Upon reaching your target, Capital One will donate 3% of the item cost to your favorite charity: American Diabetes Association">Wish List</label>
-							<div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower">
-								<span><input id="q2b" name="q2" type="radio" value="conversion"/><label for="q2b" class="radio-conversion">Sell things</label></span>
-								<span><input id="q2c" name="q2" type="radio" value="social"/><label for="q2c" class="radio-social">Become famous</label></span>
-								<span><input id="q2a" name="q2" type="radio" value="mobile"/><label for="q2a" class="radio-mobile">Mobile market</label></span>
-							</div>
+							<label class="fs-field-label fs-anim-upper" for="q2" data-info="Upon reaching your target, Capital One will donate 3% of the item cost to your favorite charity.">Wish List</label>
+							<canvas id="buyers" width="400" height="250"></canvas>
+							<div class="wishlist-container-placeholder"></div>
 						</li>
 					</ol><!-- /fs-fields -->
 					<button class="fs-submit" type="submit">Submit Payment</button>
@@ -80,6 +73,28 @@
 		</script>
 
 		<!-- Handlebar Templates -->
+		<script id="wishlist-template" type="text/x-handlebars-template">
+			<div class="wishlist-table">
+				<table>
+				<tr>
+					<th class="img"></th>
+					<th class="header name">Wished Item</th>
+					<th class="header policy">Policy</th>
+					<th class="header progress">Progress towards Goal</th>
+				</tr>
+				{{#each this}}
+					<tr class="row" data-color="{{chart_color}}">
+						<td class="cell img"><img src="{{image}}" class="wlicon" /></td>
+						<td class="cell name">{{item_name}}</td>
+						<td class="cell policy">{{item_policy}}%</td>
+						<td class="cell progress">
+							<div class="progress-wrap progress" data-progress-percent="{{item_progress}}">
+								<div class="progress-bar progress">&nbsp;{{item_progress}}%</div>
+							</div>
+						</td></tr>
+				{{/each}}
+			</div>
+		</script>
 		<script id="greetings-template" type="text/x-handlebars-template">
 	        <h1>Good {{timeofday}}, {{firstname}}</h1>
 	    </script>
